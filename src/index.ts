@@ -63,7 +63,6 @@ fastify.get<{ Params: { username: string }, Querystring: CounterQuery }>('/@:use
 
   try {
     if (useFlat) {
-      // --- FLAT TEMA ---
       const options: FlatThemeOptions = {
         bg: bg,          
         color: color,     
