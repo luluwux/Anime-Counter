@@ -6,15 +6,13 @@ Built with **TypeScript**, **Fastify**, and **Redis**. Designed to be faster and
 
 ## ✨ Features
 
-- **🎨 Dual Theme System:**
+- ** Dual Theme System:**
   - **Flat Mode:** No image assets required! Fully generated via code with custom colors, icons, and animations.
   - **Image Mode:** Supports folder-based themes (Moe-counter style) with `.png` and animated `.gif` support.
-- **⚡ High Performance:** Uses **SVG with Base64 embedding**. Reduces server load and renders instantly on GitHub.
-- **🛡️ Abuse Protection:** Built-in **Rate Limiting** to prevent spam.
-- **📉 Smart Formatting:** Automatically formats long numbers (e.g., `12.5k` instead of `12500`).
-- **🎭 Animations:** CSS-based animations for Flat themes (Slide, Fade, Pulse).
-- **🕵️ Stealth Mode:** Count visitors invisibly using a 1x1 pixel output.
-- **🐳 Docker Ready:** Easy deployment with Docker and Railway/Render.
+- ** High Performance:** Uses **SVG with Base64 embedding**. Reduces server load and renders instantly on GitHub.
+- ** Abuse Protection:** Built-in **Rate Limiting** to prevent spam.
+- ** Animations:** CSS-based animations for Flat themes (Slide, Fade, Pulse).
+- ** Docker Ready:** Easy deployment with Docker and Railway/Render.
 
 ---
 
@@ -46,5 +44,20 @@ We welcome contributions\!
 
 1.  **New Themes:** Add a new folder in `src/assets/` with images `0-9`.
 2.  **New Features:** Fork the repo, create a branch, and submit a PR.
+
+
+## 🌟 Support
+
+If you found this project helpful, please consider leaving a 🌟 star. Thank you!
+
+- [My Discord Profile](https://discord.com/users/852103749228036136)
+
+- If you find any errors, you can contact luppux
+<br> </br>
+<p align="center">
+  <a href="https://discord.gg/luppux" target="_blank">
+    <img src="https://api.weblutions.com/discord/invite/luppux/" alt="Discord Banner">
+  </a>
+</p>
 
 
