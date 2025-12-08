@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    /* Temel Ayarlar */
+    "target": "ES2020",                                  /* Çıktı JavaScript versiyonu */
+    "module": "NodeNext",                                /* Node.js'in en sevdiği modül sistemi */
+    "moduleResolution": "NodeNext",                          /* Modülleri Node stiliyle bul */
+    "outDir": "./dist",                                  /* Derlenen dosyalar buraya */
+    "rootDir": "./src",                                  /* Kaynak kodların yeri */
+    
+    /* Modül Uyumluluğu (Hatanın asıl çözümü burası) */
+    "esModuleInterop": true,                             /* CommonJS modüllerini (örn: fastify) rahatça import etmeni sağlar */
+    "verbatimModuleSyntax": false,                       /* HATA VEREN AYAR: Bunu false yapıyoruz */
+    "resolveJsonModule": true,                           /* .json dosyalarını import edebilmek için */
+    /* Katı Kurallar (Güvenlik için) */
+    "strict": true,
+    "skipLibCheck": true,                                /* Kütüphane tip hatalarını görmezden gel */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
