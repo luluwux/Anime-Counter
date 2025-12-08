@@ -6,13 +6,13 @@ Built with **TypeScript**, **Fastify**, and **Redis**. Designed to be faster and
 
 ## ✨ Features
 
-- ** Dual Theme System:**
+- **Dual Theme System:**
   - **Flat Mode:** No image assets required! Fully generated via code with custom colors, icons, and animations.
   - **Image Mode:** Supports folder-based themes (Moe-counter style) with `.png` and animated `.gif` support.
-- ** High Performance:** Uses **SVG with Base64 embedding**. Reduces server load and renders instantly on GitHub.
-- ** Abuse Protection:** Built-in **Rate Limiting** to prevent spam.
-- ** Animations:** CSS-based animations for Flat themes (Slide, Fade, Pulse).
-- ** Docker Ready:** Easy deployment with Docker and Railway/Render.
+- **High Performance:** Uses **SVG with Base64 embedding**. Reduces server load and renders instantly on GitHub.
+- **Abuse Protection:** Built-in **Rate Limiting** to prevent spam.
+- **Animations:** CSS-based animations for Flat themes (Slide, Fade, Pulse).
+- **Docker Ready:** Easy deployment with Docker and Railway/Render.
 
 ---
 
