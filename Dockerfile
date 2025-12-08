@@ -20,7 +20,7 @@ RUN npm install --only=production && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 
-COPY --from=builder /app/src/assets ./assets
+COPY --from=builder /app/src/assets ./dist/assets
 
 USER node
 
