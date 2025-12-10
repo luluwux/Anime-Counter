@@ -1,6 +1,4 @@
-// src/services/flatThemeComposer.ts
 
-// -- TİP TANIMLARI --
 export interface FlatThemeOptions {
   bg?: string;        // Arka plan rengi (Hex)
   color?: string;     // Yazı rengi (Hex)
@@ -9,10 +7,7 @@ export interface FlatThemeOptions {
   stroke?: string;    // Çerçeve rengi (opsiyonel)
 }
 
-/**
- * Sayıları "Short Number" formatına çevirir (Zorunlu)
- * Örn: 1200 -> 1.2k, 1500000 -> 1.5M
- */
+
 function formatNumber(num: number): string {
   return new Intl.NumberFormat('en-US', {
     notation: "compact",
@@ -21,9 +16,6 @@ function formatNumber(num: number): string {
   }).format(num);
 }
 
-/**
- * Animasyon CSS kodlarını döndürür
- */
 function getAnimationCSS(type: string): string {
   switch (type) {
     case 'fade':
@@ -46,37 +38,26 @@ function getAnimationCSS(type: string): string {
   }
 }
 
-/**
- * Ana Flat SVG Oluşturucu
- */
+
 export function generateFlatSVG(count: number, options: FlatThemeOptions = {}): string {
-  // 1. Sayı Formatlama (Kullanıcı değiştiremez)
+  
   const formattedCount = formatNumber(count);
   
-  // 2. Renk ve Ayarlar
-  // Varsayılan: GitHub Dark Mode renkleri
   const bgColor = options.bg ? `#${options.bg.replace('#', '')}` : '#21262d';
   const textColor = options.color ? `#${options.color.replace('#', '')}` : '#c9d1d9';
   const strokeColor = options.stroke ? `#${options.stroke.replace('#', '')}` : '#30363d';
   
-  // 3. İkon/Emoji Hazırlığı
-  // Kullanıcı emoji gönderirse araya boşluk koyuyoruz
   const iconText = options.icon ? `${options.icon} ` : '';
   const fullText = `${iconText}${formattedCount}`;
 
-  // 4. Boyut Hesaplama (Dinamik)
-  // Karakter başına yaklaşık 9px + padding
-  // Emoji varsa biraz daha genişlik ekle
   const charWidth = 9; 
   const basePadding = 24; 
   const textWidth = (formattedCount.length * charWidth) + (options.icon ? 20 : 0);
-  const totalWidth = Math.max(80, textWidth + basePadding); // En az 80px olsun
+  const totalWidth = Math.max(80, textWidth + basePadding); 
   const height = 28;
 
-  // 5. Animasyon CSS
   const animationCSS = getAnimationCSS(options.animation || 'none');
 
-  // 6. SVG Çıktısı
   return `
     <svg width="${totalWidth}" height="${height}" viewBox="0 0 ${totalWidth} ${height}" 
          xmlns="http://www.w3.org/2000/svg">
