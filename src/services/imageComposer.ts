@@ -25,7 +25,9 @@ export async function loadImages() {
     
     const theme = dirent.name;
     themeCacheBase64[theme] = {};
-    let dimensionsFound = false;
+    
+    let maxWidth = 0; 
+    let maxHeight = 0; 
 
     for (let i = 0; i <= 9; i++) {
         const gifPath = path.join(assetsDir, theme, `${i}.gif`);
@@ -47,19 +49,23 @@ export async function loadImages() {
 
         try {
             const buffer = await fs.readFile(targetPath);
-           
-            if (!dimensionsFound) {
-              
-                const meta = await sharp(buffer).metadata();
-                themeDimensions[theme] = { width: meta.width || 0, height: meta.height || 0 };
-                dimensionsFound = true;
-            }
+            
+            // Resim boyutlarını al
+            const meta = await sharp(buffer).metadata();
+            
+            // Maksimum genişlik ve yüksekliği güncelle
+            maxWidth = Math.max(maxWidth, meta.width || 0);
+            maxHeight = Math.max(maxHeight, meta.height || 0);
             
         
             themeCacheBase64[theme][i.toString()] = `data:${mimeType};base64,${buffer.toString('base64')}`;
         } catch (e) {
             console.error(`Hata (${theme}/${i}):`, e);
         }
+    }
+    
+    if (maxWidth > 0 && maxHeight > 0) {
+        themeDimensions[theme] = { width: maxWidth, height: maxHeight };
     }
   }
   console.log(`✅ Tüm temalar (PNG/GIF) yüklendi.`);
@@ -72,7 +78,7 @@ export function generateImageSVG(theme: string, count: number, padding: number =
 
   const { width, height } = themeDimensions[theme];
   const digits = count.toString().padStart(padding, '0').split('');
-  const totalWidth = width * digits.length;
+  const totalWidth = width * digits.length; 
 
   const imageParts = digits.map((digit, index) => {
     const base64Data = themeCacheBase64[theme][digit];
@@ -82,7 +88,7 @@ export function generateImageSVG(theme: string, count: number, padding: number =
   }).join('');
 
   return `
-    <svg width="${totalWidth}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+    <svg width="${totalWidth}" height="${height}" viewBox="0 0 ${totalWidth} ${height}" xmlns="http://www.w3.org/2000/svg">
       <g>${imageParts}</g>
     </svg>
   `;
