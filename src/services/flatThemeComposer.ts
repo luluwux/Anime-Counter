@@ -1,12 +1,13 @@
+import { escapeHtml, validateColor } from '../utils/sanitize.js';
 
 export interface FlatThemeOptions {
-  bg?: string;        // Arka plan rengi (Hex)
-  color?: string;     // Yazı rengi (Hex)
+  bg?: string;        // Arka plan rengi (Hex veya CSS name)
+  color?: string;     // Yazı rengi (Hex veya CSS name)
   icon?: string;      // Emoji (örn: 🔥, 🚀, ❤️)
   animation?: string; // 'fade', 'slide', 'pulse', 'none'
-  stroke?: string;    // Çerçeve rengi (opsiyonel)
+  stroke?: string;    // Çerçeve rengi
+  scale?: number;     // Boyutlandırma çarpanı (Örn: 1.5)
 }
-
 
 function formatNumber(num: number): string {
   return new Intl.NumberFormat('en-US', {
@@ -38,16 +39,16 @@ function getAnimationCSS(type: string): string {
   }
 }
 
-
 export function generateFlatSVG(count: number, options: FlatThemeOptions = {}): string {
-  
   const formattedCount = formatNumber(count);
   
-  const bgColor = options.bg ? `#${options.bg.replace('#', '')}` : '#21262d';
-  const textColor = options.color ? `#${options.color.replace('#', '')}` : '#c9d1d9';
-  const strokeColor = options.stroke ? `#${options.stroke.replace('#', '')}` : '#30363d';
+  // Renk parametrelerini enjeksiyona karşı koru
+  const bgColor = validateColor(options.bg, '#21262d');
+  const textColor = validateColor(options.color, '#c9d1d9');
+  const strokeColor = validateColor(options.stroke, '#30363d');
   
-  const iconText = options.icon ? `${options.icon} ` : '';
+  // Emojiyi enjeksiyona karşı koru
+  const iconText = options.icon ? `${escapeHtml(options.icon)} ` : '';
   const fullText = `${iconText}${formattedCount}`;
 
   const charWidth = 9; 
@@ -56,10 +57,14 @@ export function generateFlatSVG(count: number, options: FlatThemeOptions = {}): 
   const totalWidth = Math.max(80, textWidth + basePadding); 
   const height = 28;
 
+  const scale = options.scale || 1;
+  const scaledWidth = totalWidth * scale;
+  const scaledHeight = height * scale;
+
   const animationCSS = getAnimationCSS(options.animation || 'none');
 
   return `
-    <svg width="${totalWidth}" height="${height}" viewBox="0 0 ${totalWidth} ${height}" 
+    <svg width="${scaledWidth}" height="${scaledHeight}" viewBox="0 0 ${totalWidth} ${height}" 
          xmlns="http://www.w3.org/2000/svg">
       <defs>
         <style>
